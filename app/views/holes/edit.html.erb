@@ -1,0 +1,38 @@
+<h1>Editing hole</h1>
+
+<%= form_for @hole, :url => club_course_hole_path(@club_id, @course_id, @hole) do |f| %>
+  <% if @hole.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hole.errors.count, "error") %> prohibited this hole from being saved:</h2>
+
+      <ul>
+      <% @hole.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :par %><br />
+    <%= f.number_field :par %>
+  </div>
+  <div class="field">
+    <%= f.label :hdcp %><br />
+    <%= f.number_field :hdcp %>
+  </div>
+  <div class="field">
+    <%= f.label :yard %><br />
+    <%= f.number_field :yard %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', club_course_hole_path(@club_id, @course_id, @hole) %> |
+<%= link_to 'Back', club_course_holes_path(@club_id, @course_id) %>

@@ -1,0 +1,37 @@
+<%= form_for(@hole) do |f| %>
+  <% if @hole.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hole.errors.count, "error") %> prohibited this hole from being saved:</h2>
+
+      <ul>
+      <% @hole.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :course_id %><br />
+    <%= f.number_field :course_id %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :par %><br />
+    <%= f.number_field :par %>
+  </div>
+  <div class="field">
+    <%= f.label :hdcp %><br />
+    <%= f.number_field :hdcp %>
+  </div>
+  <div class="field">
+    <%= f.label :yard %><br />
+    <%= f.number_field :yard %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

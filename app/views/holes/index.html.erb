@@ -1,0 +1,31 @@
+<h1>Listing holes</h1>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Number</th>
+    <th>Par</th>
+    <th>Hdcp</th>
+    <th>Yard</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @holes.each do |hole| %>
+  <tr>
+    <td><%= hole.course_id %></td>
+    <td><%= hole.number %></td>
+    <td><%= hole.par %></td>
+    <td><%= hole.hdcp %></td>
+    <td><%= hole.yard %></td>
+    <td><%= link_to 'Show', club_course_hole_path(@club_id, @course_id, hole) %></td>
+    <td><%= link_to 'Edit', edit_club_course_hole_path(@club_id, @course_id, hole) %></td>
+    <td><%= link_to 'Destroy', club_course_hole_path(@club_id, @course_id, hole), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hole', new_club_course_hole_path %>

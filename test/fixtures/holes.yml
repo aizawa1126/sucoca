@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  course_id: 1
+  number: 1
+  par: 1
+  hdcp: 1
+  yard: 1
+
+two:
+  course_id: 2
+  number: 2
+  par: 2
+  hdcp: 2
+  yard: 2

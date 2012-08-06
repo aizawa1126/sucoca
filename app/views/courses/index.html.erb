@@ -1,0 +1,25 @@
+<h1><%= @club.name  %></h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @courses.each do |course| %>
+  <tr>
+    <td><%= course.name %></td>
+    <td><%= link_to 'Show', club_course_path(@club.id, course.id) %></td>
+    <td><%= link_to 'Edit', edit_club_course_path(@club.id, course.id) %></td>
+    <td><%= link_to 'Destroy', club_course_path(@club.id, course.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Add Hole', new_club_course_hole_path(@club.id, course.id) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Course', new_club_course_path %>
