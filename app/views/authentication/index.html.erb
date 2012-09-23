@@ -1,0 +1,12 @@
+<%= form_tag :controller => 'authentication', :action => 'login' do %>
+  <div class="field">
+    <%= label_tag 'account' %><br />
+    <%= text_field :user, :account %>
+  </div>
+  <div class="field">
+    <%= label_tag 'password' %><br />
+    <%= password_field :user, :password %>
+  </div>
+  <%= submit_tag 'Login' %>
+<% end %>
+<p><%= link_to 'アカウントをお持ちでない方', :controller => 'users', :action => 'new' %></p>

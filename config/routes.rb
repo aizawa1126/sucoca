@@ -1,11 +1,21 @@
 Scorecards::Application.routes.draw do
   root :to=>'clubs#index' #Must remove the default root page -> rm public/index.html
+
+  get 'users' => 'users#new'
+  post 'users' => 'users#create'
+  get 'users/:id' => 'users#show'
+  get 'users/:id/edit' => 'users#edit'
+  put 'users/:id' => 'users#update'
   
   resources :clubs do
     resources :courses do
       resources :holes
     end
   end
+
+  match 'authentication' => 'authentication#index'
+  match 'authentication/login' => 'authentication#login'
+  match 'authentication/logout' => 'authentication#logout'
   
   #resources :courses
   #resources :holes

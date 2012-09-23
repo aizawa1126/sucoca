@@ -14,6 +14,14 @@
 </head>
 <body>
   <h1><%= link_to 'Scorecards', root_path %></h1>
+  <% if session[:login] %>
+  <% user = session[:login]%>
+  <p><%= link_to (user[:name].blank? ? user[:account] : user[:name]), :controller => 'users', :action => 'show', :id => user[:id] %></p>
+  <p><%= link_to 'ログアウト', :controller => 'authentication', :action => 'logout' %></p>
+  <% else %>
+  <p><%= link_to 'ログイン', :controller => 'authentication', :action => 'index' %></p>
+  <% end %>
+  <p id="notice"><%= notice %></p>
 <%= yield %>
 
 </body>
