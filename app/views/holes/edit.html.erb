@@ -1,6 +1,6 @@
 <h1>Editing hole</h1>
 
-<%= form_for @hole, :url => club_course_hole_path(@club_id, @course_id, @hole) do |f| %>
+<%= form_for([@club, @course, @hole]) do |f| %>
   <% if @hole.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@hole.errors.count, "error") %> prohibited this hole from being saved:</h2>
@@ -34,5 +34,5 @@
   </div>
 <% end %>
 
-<%= link_to 'Show', club_course_hole_path(@club_id, @course_id, @hole) %> |
-<%= link_to 'Back', club_course_holes_path(@club_id, @course_id) %>
+<%= link_to 'Show', club_course_hole_path(@club, @course, @hole) %> |
+<%= link_to 'Back', club_course_holes_path(@club, @course) %>

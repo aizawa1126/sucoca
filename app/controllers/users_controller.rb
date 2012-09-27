@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:login] = @user
-        format.html { redirect_to root_path}
+        format.html { redirect_to @user }
       else
         format.html { render action: "new" }
       end
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         session[:login] = @user
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

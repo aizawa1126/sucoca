@@ -1,6 +1,6 @@
 <h1>New course</h1>
 
-<%= form_for @course, :url => {:controller => 'courses', :action => 'create', :club_id => @club_id} do |f| %>
+<%= form_for([@club, @course]) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>

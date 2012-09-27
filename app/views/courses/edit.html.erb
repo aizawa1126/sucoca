@@ -1,6 +1,6 @@
 <h1>Editing course</h1>
 
-<%= form_for([@course.club, @course]) do |f| %>
+<%= form_for([@club, @course]) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
@@ -20,6 +20,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-<%= link_to 'Show', {:controller => 'courses', :action => 'show', :id => @course.id, :club_id => @course.club.id} %> |
-<%= link_to 'Back', {:controller => 'courses', :action => 'index', :club_id => @course.club.id} %>

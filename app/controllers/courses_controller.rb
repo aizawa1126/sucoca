@@ -1,11 +1,10 @@
 class CoursesController < ApplicationController
+  before_filter :set_club
+
   # GET /courses
   # GET /courses.json
   def index
     begin
-      @club = Club.find(params[:club_id])
-      raise if @club.nil?
-      
       conditions = ["club_id = ?",@club.id]
       @courses = Course.find(:all, :conditions => conditions)
       
@@ -22,8 +21,6 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     begin
-      set_club_id
-      
       @course = Course.find(params[:id])
       raise if @course.nil?
       
@@ -43,10 +40,7 @@ class CoursesController < ApplicationController
   # GET /courses/new.json
   def new
     begin
-      set_club_id
-      
       @course = Course.new
-    
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @course }
@@ -70,16 +64,12 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     begin
-      set_club_id
-      
       @course = Course.new(params[:course])
-      if params[:club_id]
-        @course.club = Club.find(params[:club_id])
-      end
+      @course.club = @club
       
       respond_to do |format|
         if @course.save
-          format.html { redirect_to :controller => 'courses', :action => 'show', :club_id => @club_id, :id => @course.id, notice: 'Course was successfully created.' }
+          format.html { redirect_to club_course_path(@club, @course)}
           format.json { render json: @course, status: :created, location: @course }
         else
           format.html { render action: "new" }
@@ -100,7 +90,7 @@ class CoursesController < ApplicationController
       
       respond_to do |format|
         if @course.update_attributes(params[:course])
-          format.html { redirect_to club_courses_path, notice: 'Course was successfully updated.' }
+          format.html { redirect_to club_course_path }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -131,8 +121,12 @@ class CoursesController < ApplicationController
   end
   
   private
-  def set_club_id
-    @club_id = params[:club_id] if params[:club_id]
-    raise if @club_id.nil?
+  def set_club
+    if params[:club_id]
+      @club = Club.find(params[:club_id])
+      raise if @club.nil?
+    else
+      raise
+    end
   end
 end

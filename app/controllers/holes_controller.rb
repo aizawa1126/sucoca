@@ -1,11 +1,10 @@
 class HolesController < ApplicationController
+  before_filter :set_club, :set_course
+
   # GET /holes
   # GET /holes.json
   def index
     begin
-      set_club_id
-      set_course_id
-      
       @holes = Hole.all
       
       respond_to do |format|
@@ -21,9 +20,6 @@ class HolesController < ApplicationController
   # GET /holes/1.json
   def show
     begin
-      set_club_id
-      set_course_id
-    
       @hole = Hole.find(params[:id])
       raise if @hole.nil?
       
@@ -40,11 +36,7 @@ class HolesController < ApplicationController
   # GET /holes/new.json
   def new
     begin
-      set_club_id
-      set_course_id
-    
       @hole = Hole.new
-    
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @hole }
@@ -57,9 +49,6 @@ class HolesController < ApplicationController
   # GET /holes/1/edit
   def edit
     begin
-      set_club_id
-      set_course_id
-      
       @hole = Hole.find(params[:id])
       raise if @hole.nil?
     rescue
@@ -71,17 +60,12 @@ class HolesController < ApplicationController
   # POST /holes.json
   def create
     begin
-      set_club_id
-      set_course_id
-      
       @hole = Hole.new(params[:hole])
-      raise if @hole.nil?
-      if params[:club_id]
-        @hole.course = Course.find(params[:course_id])
-      end
+      @hole.course = @course
+
       respond_to do |format|
         if @hole.save
-          format.html { redirect_to club_course_holes_path(@club_id, @course_id), notice: 'Hole was successfully created.' }
+          format.html { redirect_to club_course_hole_path(@club, @course, @hole), notice: 'Hole was successfully created.' }
           format.json { render json: @hole, status: :created, location: @hole }
         else
           format.html { render action: "new" }
@@ -89,7 +73,7 @@ class HolesController < ApplicationController
         end
       end
     rescue
-      render :layout => 'error', :template => 'errors/error'
+      #render :layout => 'error', :template => 'errors/error'
     end
   end
 
@@ -97,15 +81,12 @@ class HolesController < ApplicationController
   # PUT /holes/1.json
   def update
     begin
-      set_club_id
-      set_course_id
-      
       @hole = Hole.find(params[:id])
       raise if @hole.nil?
       
       respond_to do |format|
         if @hole.update_attributes(params[:hole])
-          format.html { redirect_to club_course_hole_path(@club_id, @course_id, @hole), notice: 'Hole was successfully updated.' }
+          format.html { redirect_to club_course_hole_path(@club, @course, @hole), notice: 'Hole was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -121,9 +102,6 @@ class HolesController < ApplicationController
   # DELETE /holes/1.json
   def destroy
     begin
-      set_club_id
-      set_course_id
-      
       @hole = Hole.find(params[:id])
       raise if @hole.nil?
       
@@ -140,13 +118,21 @@ class HolesController < ApplicationController
   
   
   private
-  def set_club_id
-    @club_id = params[:club_id] if params[:club_id]
-    raise if @club_id.nil?
+  def set_club
+    if params[:club_id]
+      @club = Club.find(params[:club_id])
+      raise if @club.nil?
+    else
+      raise
+    end
   end
  
-  def set_course_id
-    @course_id = params[:course_id] if params[:course_id]
-    raise if @course_id.nil?
+  def set_course
+    if params[:course_id]
+      @course = Course.find(params[:course_id])
+      raise if @course.nil?
+    else
+      raise
+    end
   end
 end
