@@ -21,17 +21,21 @@ body {
   left: 0px;
   top: 0px;
   border-bottom: solid 2px #888;
+  background-image: url(/assets/hd_bg.png);
 }
 
 .header h1 {
   margin-top: 0;
   margin-bottom: 0;
+  position: relative;
+  top: 4px;
+  padding-left: 4px;
 }
 
 .header .menu {
   position: absolute;
   right: 0;
-  top: 3px;
+  top: 8px;
   margin-top: 0;
   margin-bottom: 0;
 }
