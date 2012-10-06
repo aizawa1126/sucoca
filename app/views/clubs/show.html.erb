@@ -8,12 +8,13 @@
   <%= @club.address %>
 </p>
 
+<%= link_to 'Edit', edit_club_path(@club) %> |
+<%= link_to 'Destroy', @club, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', clubs_path %>
+
 <table>
   <tr>
     <th>Course Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -21,14 +22,7 @@
   <tr>
     <td><%= course.name %></td>
     <td><%= link_to 'Show', club_course_path(course.club.id, course.id) %></td>
-    <td><%= link_to 'Edit', edit_club_course_path(course.club.id, course.id) %></td>
-    <td><%= link_to 'Destroy', club_course_path(course.club.id, course.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><%= link_to 'Add Hole', new_club_course_hole_path(course.club.id, course.id) %></td>
   </tr>
 <% end %>
 </table>
-<br />
 <%= link_to 'New Course', new_club_course_path(@club) %>
-<br />
-<%= link_to 'Edit', edit_club_path(@club) %> |
-<%= link_to 'Back', clubs_path %>

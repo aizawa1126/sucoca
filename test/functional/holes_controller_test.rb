@@ -48,6 +48,6 @@ class HolesControllerTest < ActionController::TestCase
       delete :destroy, id: @hole, club_id: @club.id, course_id: @course.id
     end
 
-    assert_redirected_to club_course_holes_path
+    assert_redirected_to club_course_path
   end
 end

@@ -5,9 +5,6 @@
     <th>Name</th>
     <th>Address</th>
     <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @clubs.each do |club| %>
@@ -15,8 +12,6 @@
     <td><%= club.name %></td>
     <td><%= club.address %></td>
     <td><%= link_to 'Show', club %></td>
-    <td><%= link_to 'Edit', edit_club_path(club) %></td>
-    <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

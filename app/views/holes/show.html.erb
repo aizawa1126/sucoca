@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Course:</b>
   <%= @hole.course_id %>
@@ -26,5 +24,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_club_course_hole_path(@club_id, @course_id, @hole) %> |
-<%= link_to 'Back', club_course_holes_path(@club_id, @course_id) %>
+<%= link_to 'Edit', edit_club_course_hole_path(@club, @course, @hole) %> |
+<%= link_to 'Destroy', club_course_hole_path(@club, @course, @hole), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', club_course_path(@club, @course) %>

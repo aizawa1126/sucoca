@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
   def index
     begin
       conditions = ["club_id = ?",@club.id]
-      @courses = Course.find(:all, :conditions => conditions)
+      @courses = Course.find(:all, :order => 'id', :conditions => conditions)
       
       respond_to do |format|
         format.html # index.html.erb

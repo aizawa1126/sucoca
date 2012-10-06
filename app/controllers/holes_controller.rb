@@ -5,8 +5,9 @@ class HolesController < ApplicationController
   # GET /holes.json
   def index
     begin
-      @holes = Hole.all
-      
+      conditions = ["course_id = ?",@course.id]
+      @holes = Hole.find(:all, :order => 'number', :conditions => conditions)
+
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @holes }
@@ -83,7 +84,7 @@ class HolesController < ApplicationController
     begin
       @hole = Hole.find(params[:id])
       raise if @hole.nil?
-      
+
       respond_to do |format|
         if @hole.update_attributes(params[:hole])
           format.html { redirect_to club_course_hole_path(@club, @course, @hole), notice: 'Hole was successfully updated.' }
@@ -108,7 +109,7 @@ class HolesController < ApplicationController
       @hole.destroy
 
       respond_to do |format|
-        format.html { redirect_to club_course_holes_url }
+        format.html { redirect_to club_course_path(@club, @course) }
         format.json { head :no_content }
       end
     rescue

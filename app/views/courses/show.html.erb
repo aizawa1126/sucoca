@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Club:</b>
   <%= @club.name %>
@@ -10,31 +8,27 @@
   <%= @course.name %>
 </p>
 
+<%= link_to 'Edit', edit_club_course_path(@club, @course) %> |
+<%= link_to 'Destroy', club_course_path(@club.id, @course), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', club_courses_path %>
+
 <table>
   <tr>
-    <th>Course</th>
     <th>Number</th>
     <th>Par</th>
     <th>Hdcp</th>
     <th>Yard</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @holes.each do |hole| %>
   <tr>
-    <td><%= hole.course_id %></td>
     <td><%= hole.number %></td>
     <td><%= hole.par %></td>
     <td><%= hole.hdcp %></td>
     <td><%= hole.yard %></td>
     <td><%= link_to 'Show', club_course_hole_path(@club, @course.id, hole) %></td>
-    <td><%= link_to 'Edit', edit_club_course_hole_path(@club, @course.id, hole) %></td>
-    <td><%= link_to 'Destroy', club_course_hole_path(@club, @course.id, hole), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'Edit', edit_club_course_path(@club, @course) %> |
-<%= link_to 'Back', club_courses_path %>
+<%= link_to 'Add Hole', new_club_course_hole_path(@club.id, @course) %>

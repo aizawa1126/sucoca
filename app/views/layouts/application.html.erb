@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Scorecards</title>
+  <title>Sucoca</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
@@ -13,14 +13,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1><%= link_to 'Scorecards', root_path %></h1>
+  <div class="header">
+  <h1><%= link_to 'Sucoca', root_path %></h1>
+  <p class="menu">
   <% if session[:login] %>
   <% user = session[:login]%>
-  <p><%= link_to (user[:name].blank? ? user[:account] : user[:name]), :controller => 'users', :action => 'show', :id => user[:id] %></p>
-  <p><%= link_to 'ログアウト', :controller => 'authentication', :action => 'logout' %></p>
+    <%= link_to (user[:name].blank? ? user[:account] : user[:name]), :controller => 'users', :action => 'show', :id => user[:id] %>
+    <%= link_to 'ログアウト', :controller => 'authentication', :action => 'logout' %>
   <% else %>
-  <p><%= link_to 'ログイン', :controller => 'authentication', :action => 'index' %></p>
+    <%= link_to 'ログイン', :controller => 'authentication', :action => 'index' %>
   <% end %>
+  </p>
+  </div>
   <p id="notice"><%= notice %></p>
 <%= yield %>
 
