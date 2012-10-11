@@ -1,0 +1,86 @@
+<p>
+  <b>Club:</b>
+  <%= @club.name %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @course.name %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @scorecard.date %>
+</p>
+
+<p>
+  <b>Players:</b>
+  <% @players.each do |player| %>
+  <%= player.name %>
+  <% end %>
+</p>
+<table>
+  <tr>
+    <th>Hole</th>
+    <% for i in 1..18 %>
+    <th><%= i %></th>
+    <% if i == 9 %>
+    <th>Out</th>
+    <% end %>
+    <% end %>
+    <th>In</th>
+    <th>Out</th>
+    <th>Total</th>
+  </tr>
+
+  <tr>
+    <td>Yard</td>
+    <% out_yard = in_yard = 0 %>
+    <% @holes.each do |hole| %>
+    <% hole.number < 10 ? out_yard += hole.yard : in_yard += hole.yard %>
+    <td><%= hole.yard %></td>
+    <% if hole.number == 9 %>
+    <td><%= out_yard %></dt>
+    <% end %>
+    <% end %>
+    <td><%= in_yard %></td>
+    <td><%= out_yard %></td>
+    <td><%= out_yard + in_yard %></th>
+  </tr>
+
+  <tr>
+    <td>Par</td>
+    <% out_par = in_par = 0 %>
+    <% @holes.each do |hole| %>
+    <% hole.number < 10 ? out_par += hole.par : in_par += hole.par %>
+    <td><%= hole.par %></td>
+    <% if hole.number == 9 %>
+    <td><%= out_par %></dt>
+    <% end %>
+    <% end %>
+    <td><%= in_par %></td>
+    <td><%= out_par %></td>
+    <td><%= out_par + in_par %></th>
+  </tr>
+
+  <% @players.each do |player| %>
+  <tr>
+    <td><%= player.name %></td>
+    <% out_score = in_score = 0 %>
+    <% @holes.each do |hole| %>
+    <% hole.number < 10 ? out_score += hole.par : in_score += hole.par %>
+    <td><%= hole.par %></td>
+    <% if hole.number == 9 %>
+    <td><%= out_score %></dt>
+    <% end %>
+    <% end %>
+    <td><%= in_score %></td>
+    <td><%= out_score %></td>
+    <td><%= out_score + in_score %></th>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Add Player', edit_scorecard_path(@scorecard) %> |
+<%= link_to 'Edit', edit_scorecard_path(@scorecard) %> |
+<%= link_to 'Back', scorecards_path %>
